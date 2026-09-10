@@ -1,5 +1,5 @@
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { Heart, Play, X, Sparkles, Sun, Moon, Menu, Loader2, Share2, Globe, RefreshCw } from 'lucide-react';
+import { Heart, Play, X, Sparkles, Sun, Moon, Menu, Loader2, Share2, RefreshCw } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 
 interface Video {
@@ -20,7 +20,6 @@ interface Quote {
   textEn: string;
 }
 
-// Fleurs 3D multicolores
 const Flower3D = ({ color, className, style }: { color: string; className?: string; style?: React.CSSProperties }) => (
   <svg className={className} style={style} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -49,7 +48,6 @@ const Flower3D = ({ color, className, style }: { color: string; className?: stri
   </svg>
 );
 
-// Papillon SVG
 const Butterfly = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
   <svg className={className} style={style} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -124,7 +122,7 @@ const translations = {
     peaceQuote: "خذ نفساً عميقاً... واترك العالم للحظة.",
     giveWord: "✨ أعطني كلمة اليوم",
     share: "مشاركة",
-    footer: "صُنع بحبّ لكل من يمرّ من هنا  — @hanoflora",
+    footer: "صُنع بحبّ لكل من يمرّ من هنا 🌸 — @hanoflora",
     play: "اضغطي للتشغيل",
     youtube: "يوتيوب",
     syncing: "مزامنة...",
@@ -150,7 +148,7 @@ const translations = {
     peaceQuote: "Take a deep breath... and leave the world for a moment.",
     giveWord: "✨ Give me a word of the day",
     share: "Share",
-    footer: "Made with love for everyone who passes by here 🌸 — @hanoflora",
+    footer: "Made with love for everyone who passes by here  — @hanoflora",
     play: "Click to play",
     youtube: "YouTube",
     syncing: "Syncing...",
@@ -173,7 +171,7 @@ const HANENNE_BG_IMAGE = '/hanoflora.jpg';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [lang, setLang] = useState<'ar' | 'en'>('ar'); // ARABE PAR DEFAUT
+  const [lang, setLang] = useState<'ar' | 'en'>('ar');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
@@ -337,7 +335,6 @@ function App() {
   return (
     <div className={`min-h-screen transition-colors duration-700 overflow-x-hidden ${darkMode ? 'dark' : ''}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       
-      {/* BACKGROUND DYNAMIQUE */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div 
           className={`absolute inset-0 transition-colors duration-1000 ${
@@ -402,8 +399,7 @@ function App() {
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)' }} />
       </div>
 
-      {/* Header */}
-      <header className={`fixed top-0 w-full z-50 backdrop-blur-xl border-b transition-colors duration-700 ${
+      <header className={`fixed top-0 w-full z-40 backdrop-blur-xl border-b transition-colors duration-700 ${
         darkMode ? 'bg-[#1a1f4d]/80 border-[#FFB6C1]/30' : 'bg-[#FFF5F7]/70 border-[#800020]/30'
       }`}>
         <AndalusianBorder className="w-full h-2 absolute top-0 left-0" />
@@ -444,7 +440,10 @@ function App() {
               </a>
             </div>
 
-            <div className="md:hidden flex items-center">
+            <div className="md:hidden flex items-center gap-2">
+              <button onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')} className={`p-2 rounded-lg transition-colors ${darkMode ? 'hover:bg-[#FFB6C1]/20' : 'hover:bg-[#800020]/20'}`}>
+                <span className="text-xl">{lang === 'ar' ? '🇬' : '🇹🇳'}</span>
+              </button>
               <button onClick={() => setMobileMenuOpen(true)} className={`p-2 rounded-lg transition-colors ${darkMode ? 'hover:bg-[#FFB6C1]/20' : 'hover:bg-[#800020]/20'}`}>
                 <Menu className="w-6 h-6" />
               </button>
@@ -453,11 +452,9 @@ function App() {
         </div>
       </header>
 
-      {/* MENU LATÉRAL MOBILE */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
-            {/* Overlay sombre */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -466,7 +463,6 @@ function App() {
               className="fixed inset-0 bg-black/60 z-50 md:hidden backdrop-blur-sm"
             />
             
-            {/* Sidebar glissante */}
             <motion.div 
               initial={{ x: lang === 'ar' ? '100%' : '-100%' }}
               animate={{ x: 0 }}
@@ -477,7 +473,6 @@ function App() {
               }`}
             >
               <div className="flex flex-col h-full">
-                {/* Header du menu */}
                 <div className={`flex justify-between items-center p-6 border-b ${darkMode ? 'border-[#FFB6C1]/30' : 'border-[#800020]/30'}`}>
                   <h2 className={`text-2xl font-kufi font-bold ${darkMode ? 'text-[#FFB6C1]' : 'text-[#800020]'}`}>
                     {lang === 'ar' ? 'القائمة' : 'Menu'}
@@ -487,7 +482,6 @@ function App() {
                   </button>
                 </div>
 
-                {/* Navigation */}
                 <nav className="flex-1 p-6 space-y-4">
                   <a href="#" onClick={() => setMobileMenuOpen(false)} className={`block py-3 px-4 rounded-xl font-kufi text-lg transition-all ${darkMode ? 'text-[#F5E6D3] hover:bg-[#FFB6C1]/20 hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:bg-[#800020]/20 hover:text-[#800020]'}`}>
                     {t.home}
@@ -503,27 +497,23 @@ function App() {
                   </a>
                 </nav>
 
-                {/* Options en bas */}
                 <div className={`p-6 border-t space-y-4 ${darkMode ? 'border-[#FFB6C1]/30' : 'border-[#800020]/30'}`}>
-                  {/* Sélecteur de langue avec drapeaux */}
                   <div className="flex gap-3">
                     <button onClick={() => { setLang('ar'); setMobileMenuOpen(false); }} className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${lang === 'ar' ? 'bg-gradient-to-r from-[#FFB6C1] to-[#FF69B4] text-[#1a1f4d]' : darkMode ? 'bg-[#FFB6C1]/10 text-[#FFB6C1]' : 'bg-[#800020]/10 text-[#800020]'}`}>
                       <span className="text-2xl">🇹🇳</span>
                       <span>عربي</span>
                     </button>
                     <button onClick={() => { setLang('en'); setMobileMenuOpen(false); }} className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${lang === 'en' ? 'bg-gradient-to-r from-[#FFB6C1] to-[#FF69B4] text-[#1a1f4d]' : darkMode ? 'bg-[#FFB6C1]/10 text-[#FFB6C1]' : 'bg-[#800020]/10 text-[#800020]'}`}>
-                      <span className="text-2xl">🇬🇧</span>
+                      <span className="text-2xl">🇬</span>
                       <span>ENG</span>
                     </button>
                   </div>
 
-                  {/* Mode sombre/clair */}
                   <button onClick={() => setDarkMode(!darkMode)} className={`w-full py-3 px-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${darkMode ? 'bg-[#FFB6C1]/20 text-[#FFB6C1]' : 'bg-[#800020]/20 text-[#800020]'}`}>
                     {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                     {darkMode ? 'وضع النهار' : 'Night Mode'}
                   </button>
 
-                  {/* Bouton Follow */}
                   <a href="https://www.tiktok.com/@hanoflora" target="_blank" rel="noopener noreferrer" className="block w-full py-3 px-4 rounded-xl font-semibold text-center bg-gradient-to-r from-[#FFB6C1] via-[#FF69B4] to-[#FF1493] text-[#1a1f4d] hover:shadow-lg transition-all">
                     <Heart className="w-5 h-5 inline mr-2 fill-current" /> {t.follow}
                   </a>
@@ -534,7 +524,6 @@ function App() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
@@ -582,7 +571,6 @@ function App() {
         </div>
       </section>
 
-      {/* Videos Section */}
       <section id="videos" className="relative py-24 px-4">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
@@ -655,7 +643,7 @@ function App() {
                               <h3 className="text-[#F5E6D3] text-sm mb-3 line-clamp-2 leading-relaxed">{video.title}</h3>
                               <div className="flex items-center justify-between text-xs text-[#F5E6D3]/70 mb-3">
                                 <span>{formatDate(video.publishedAt)}</span>
-                                {video.viewCount && <span>👁 {video.viewCount}</span>}
+                                {video.viewCount && <span> {video.viewCount}</span>}
                               </div>
                               <button onClick={() => handlePlayVideo(video.id)}
                                 className="w-full py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all shadow-lg bg-gradient-to-r from-[#FFB6C1] via-[#FF69B4] to-[#1a0a05] text-[#FFD700] hover:shadow-[#FFB6C1]/50 border border-[#FFD700]/30">
@@ -697,7 +685,6 @@ function App() {
         </div>
       </section>
 
-      {/* Quote Section */}
       <section id="quotes" className="relative py-24 px-4">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }} className="mb-6">
@@ -745,7 +732,6 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className={`relative border-t py-16 px-4 transition-colors duration-700 backdrop-blur-xl ${
         darkMode ? 'bg-[#0f1230]/90 border-[#FFB6C1]/30' : 'bg-[#FFF5F7]/80 border-[#800020]/30'
       }`}>
