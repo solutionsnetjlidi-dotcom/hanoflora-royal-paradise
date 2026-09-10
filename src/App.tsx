@@ -124,7 +124,7 @@ const translations = {
     peaceQuote: "خذ نفساً عميقاً... واترك العالم للحظة.",
     giveWord: "✨ أعطني كلمة اليوم",
     share: "مشاركة",
-    footer: "صُنع بحبّ لكل من يمرّ من هنا 🌸 — @hanoflora",
+    footer: "صُنع بحبّ لكل من يمرّ من هنا  — @hanoflora",
     play: "اضغطي للتشغيل",
     youtube: "يوتيوب",
     syncing: "مزامنة...",
@@ -173,7 +173,7 @@ const HANENNE_BG_IMAGE = '/hanoflora.jpg';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [lang, setLang] = useState<'ar' | 'en'>('ar');
+  const [lang, setLang] = useState<'ar' | 'en'>('ar'); // ARABE PAR DEFAUT
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
@@ -318,7 +318,6 @@ function App() {
     setPlayingVideoId(null);
   };
 
-  // Fleurs sans jaune
   const flowers = [
     { color: "#800020", x: 5, y: 10 },
     { color: "#E6E6FA", x: 20, y: 60 },
@@ -328,7 +327,6 @@ function App() {
     { color: "#DC143C", x: 90, y: 40 },
   ];
 
-  // Papillons flottants
   const butterflies = [
     { x: 8, y: 12, delay: 0, duration: 18 },
     { x: 85, y: 8, delay: 3, duration: 22 },
@@ -339,33 +337,20 @@ function App() {
   return (
     <div className={`min-h-screen transition-colors duration-700 overflow-x-hidden ${darkMode ? 'dark' : ''}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       
-      {/* BACKGROUND DYNAMIQUE - BLEU NUIT PROFOND pour mode sombre */}
+      {/* BACKGROUND DYNAMIQUE */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        
-        {/* Couche 1: Gradient de base - BLEU NUIT de l'image */}
         <motion.div 
           className={`absolute inset-0 transition-colors duration-1000 ${
-            darkMode 
-              ? 'bg-gradient-to-br from-[#1a1f4d] via-[#1e2460] to-[#2a2f6e]' 
-              : 'bg-gradient-to-br from-[#FFF5F7] via-[#F5F0FF] to-[#F0FFF5]'
+            darkMode ? 'bg-gradient-to-br from-[#1a1f4d] via-[#1e2460] to-[#2a2f6e]' : 'bg-gradient-to-br from-[#FFF5F7] via-[#F5F0FF] to-[#F0FFF5]'
           }`}
           animate={{
             background: darkMode 
-              ? [
-                  'linear-gradient(135deg, #1a1f4d 0%, #1e2460 50%, #2a2f6e 100%)',
-                  'linear-gradient(135deg, #2a2f6e 0%, #1a1f4d 50%, #1e2460 100%)',
-                  'linear-gradient(135deg, #1e2460 0%, #2a2f6e 50%, #1a1f4d 100%)',
-                ]
-              : [
-                  'linear-gradient(135deg, #FFF5F7 0%, #F5F0FF 50%, #F0FFF5 100%)',
-                  'linear-gradient(135deg, #F0FFF5 0%, #FFF5F7 50%, #F5F0FF 100%)',
-                  'linear-gradient(135deg, #F5F0FF 0%, #F0FFF5 50%, #FFF5F7 100%)',
-                ]
+              ? ['linear-gradient(135deg, #1a1f4d 0%, #1e2460 50%, #2a2f6e 100%)', 'linear-gradient(135deg, #2a2f6e 0%, #1a1f4d 50%, #1e2460 100%)', 'linear-gradient(135deg, #1e2460 0%, #2a2f6e 50%, #1a1f4d 100%)']
+              : ['linear-gradient(135deg, #FFF5F7 0%, #F5F0FF 50%, #F0FFF5 100%)', 'linear-gradient(135deg, #F0FFF5 0%, #FFF5F7 50%, #F5F0FF 100%)', 'linear-gradient(135deg, #F5F0FF 0%, #F0FFF5 50%, #FFF5F7 100%)']
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
         />
 
-        {/* Couche 2: Image de Hanenne avec parallax */}
         <motion.div className="absolute inset-0" style={{ y: bgY, scale: bgScale, opacity: bgOpacity }}>
           <div className="w-full h-[120%] -mt-[10%]" style={{
             backgroundImage: `url('${HANENNE_BG_IMAGE}')`,
@@ -374,7 +359,6 @@ function App() {
           }} />
         </motion.div>
 
-        {/* Couche 3: Overlay gradient dynamique */}
         <motion.div className="absolute inset-0" style={{
             background: darkMode
               ? 'radial-gradient(circle at 20% 50%, rgba(139, 0, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(230, 230, 250, 0.1) 0%, transparent 50%), radial-gradient(circle at 50% 80%, rgba(255, 182, 193, 0.15) 0%, transparent 50%)'
@@ -382,20 +366,12 @@ function App() {
           }}
           animate={{
             background: darkMode
-              ? [
-                  'radial-gradient(circle at 20% 50%, rgba(139, 0, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(230, 230, 250, 0.1) 0%, transparent 50%)',
-                  'radial-gradient(circle at 80% 50%, rgba(139, 0, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(230, 230, 250, 0.1) 0%, transparent 50%)',
-                  'radial-gradient(circle at 50% 20%, rgba(139, 0, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 80%, rgba(230, 230, 250, 0.1) 0%, transparent 50%)',
-                ]
-              : [
-                  'radial-gradient(circle at 20% 50%, rgba(139, 0, 255, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(230, 230, 250, 0.06) 0%, transparent 50%)',
-                  'radial-gradient(circle at 80% 50%, rgba(139, 0, 255, 0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(230, 230, 250, 0.06) 0%, transparent 50%)',
-                ]
+              ? ['radial-gradient(circle at 20% 50%, rgba(139, 0, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(230, 230, 250, 0.1) 0%, transparent 50%)', 'radial-gradient(circle at 80% 50%, rgba(139, 0, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(230, 230, 250, 0.1) 0%, transparent 50%)', 'radial-gradient(circle at 50% 20%, rgba(139, 0, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 80%, rgba(230, 230, 250, 0.1) 0%, transparent 50%)']
+              : ['radial-gradient(circle at 20% 50%, rgba(139, 0, 255, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(230, 230, 250, 0.06) 0%, transparent 50%)', 'radial-gradient(circle at 80% 50%, rgba(139, 0, 255, 0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(230, 230, 250, 0.06) 0%, transparent 50%)']
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
 
-        {/* Couche 4: Fleurs 3D flottantes */}
         {flowers.map((flower, i) => (
           <motion.div key={i} className="absolute" style={{ left: `${flower.x}%`, top: `${flower.y}%` }}
             animate={{ y: [0, -40, 0], rotate: [0, 180, 360], scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
@@ -404,7 +380,6 @@ function App() {
           </motion.div>
         ))}
 
-        {/* Couche 5: Papillons flottants */}
         {butterflies.map((b, i) => (
           <motion.div key={`butterfly-${i}`} className="absolute" style={{ left: `${b.x}%`, top: `${b.y}%` }}
             animate={{ x: [0, 80, -40, 60, 0], y: [0, -60, 30, -80, 0], rotate: [0, 15, -15, 10, 0] }}
@@ -415,7 +390,6 @@ function App() {
           </motion.div>
         ))}
 
-        {/* Couche 6: Particules brillantes */}
         {[...Array(50)].map((_, i) => (
           <motion.div key={`particle-${i}`} className={`absolute w-2 h-2 rounded-full ${
               i % 5 === 0 ? 'bg-[#FFB6C1]' : i % 5 === 1 ? 'bg-[#E6E6FA]' : i % 5 === 2 ? 'bg-[#8B00FF]' : i % 5 === 3 ? 'bg-[#4169E1]' : 'bg-[#FFD700]'
@@ -425,7 +399,6 @@ function App() {
             transition={{ duration: 4 + Math.random() * 4, repeat: Infinity, delay: Math.random() * 5 }} />
         ))}
 
-        {/* Couche 7: Effet vignette */}
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)' }} />
       </div>
 
@@ -446,10 +419,10 @@ function App() {
             </div>
 
             <nav className="hidden md:flex space-x-8 space-x-reverse">
-              <a href="#" className={`font-medium transition-colors ${darkMode ? 'text-[#F5E6D3] hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:text-[#800020]'}`}>{t.home}</a>
-              <a href="#videos" className={`font-medium transition-colors ${darkMode ? 'text-[#F5E6D3] hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:text-[#800020]'}`}>{t.videos}</a>
-              <a href="#quotes" className={`font-medium transition-colors ${darkMode ? 'text-[#F5E6D3] hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:text-[#800020]'}`}>{t.quotes}</a>
-              <a href="https://www.tiktok.com/@hanoflora" target="_blank" rel="noopener noreferrer" className={`font-medium transition-colors ${darkMode ? 'text-[#F5E6D3] hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:text-[#800020]'}`}>{t.tiktok}</a>
+              <a href="#" className={`font-kufi font-medium transition-colors ${darkMode ? 'text-[#F5E6D3] hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:text-[#800020]'}`}>{t.home}</a>
+              <a href="#videos" className={`font-kufi font-medium transition-colors ${darkMode ? 'text-[#F5E6D3] hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:text-[#800020]'}`}>{t.videos}</a>
+              <a href="#quotes" className={`font-kufi font-medium transition-colors ${darkMode ? 'text-[#F5E6D3] hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:text-[#800020]'}`}>{t.quotes}</a>
+              <a href="https://www.tiktok.com/@hanoflora" target="_blank" rel="noopener noreferrer" className={`font-kufi font-medium transition-colors ${darkMode ? 'text-[#F5E6D3] hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:text-[#800020]'}`}>{t.tiktok}</a>
             </nav>
 
             <div className="hidden md:flex items-center space-x-4 space-x-reverse">
@@ -457,8 +430,8 @@ function App() {
                 <RefreshCw className="w-5 h-5" />
               </button>
               <button onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')} className={`p-2 rounded-lg transition-colors flex items-center gap-2 ${darkMode ? 'hover:bg-[#FFB6C1]/20' : 'hover:bg-[#800020]/20'}`}>
-                <Globe className="w-5 h-5" />
-                <span className="text-sm font-semibold">{lang === 'ar' ? 'EN' : 'عربي'}</span>
+                <span className="text-xl">{lang === 'ar' ? '🇬🇧' : '🇹🇳'}</span>
+                <span className="text-sm font-semibold">{lang === 'ar' ? 'ENG' : 'TN'}</span>
               </button>
               <button onClick={() => setDarkMode(!darkMode)} className={`p-2 rounded-lg transition-colors ${darkMode ? 'hover:bg-[#FFB6C1]/20' : 'hover:bg-[#800020]/20'}`}>
                 {darkMode ? <Sun className="w-5 h-5 text-[#FFB6C1]" /> : <Moon className="w-5 h-5 text-[#800020]" />}
@@ -472,30 +445,94 @@ function App() {
             </div>
 
             <div className="md:hidden flex items-center">
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`p-2 rounded-lg transition-colors ${darkMode ? 'hover:bg-[#FFB6C1]/20' : 'hover:bg-[#800020]/20'}`}>
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <button onClick={() => setMobileMenuOpen(true)} className={`p-2 rounded-lg transition-colors ${darkMode ? 'hover:bg-[#FFB6C1]/20' : 'hover:bg-[#800020]/20'}`}>
+                <Menu className="w-6 h-6" />
               </button>
             </div>
           </div>
         </div>
+      </header>
 
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} 
-              className={`md:hidden border-b overflow-hidden backdrop-blur-xl ${darkMode ? 'bg-[#1a1f4d]/95 border-[#FFB6C1]/30' : 'bg-[#FFF5F7]/90 border-[#800020]/30'}`}>
-              <div className="px-4 pt-2 pb-4 space-y-2">
-                <a href="#" className="block px-3 py-2 rounded-md hover:bg-[#FFB6C1]/20">{t.home}</a>
-                <a href="#videos" className="block px-3 py-2 rounded-md hover:bg-[#FFB6C1]/20">{t.videos}</a>
-                <a href="#quotes" className="block px-3 py-2 rounded-md hover:bg-[#FFB6C1]/20">{t.quotes}</a>
-                <a href="https://www.tiktok.com/@hanoflora" target="_blank" rel="noopener noreferrer" className="block px-3 py-2 rounded-md text-[#FFB6C1] font-bold">{t.tiktok}</a>
-                <button onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')} className="block px-3 py-2 rounded-md font-bold">
-                  {lang === 'ar' ? 'English' : 'العربية'}
-                </button>
+      {/* MENU LATÉRAL MOBILE */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Overlay sombre */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 z-50 md:hidden backdrop-blur-sm"
+            />
+            
+            {/* Sidebar glissante */}
+            <motion.div 
+              initial={{ x: lang === 'ar' ? '100%' : '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: lang === 'ar' ? '100%' : '-100%' }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className={`fixed top-0 ${lang === 'ar' ? 'right-0' : 'left-0'} w-80 h-full z-50 md:hidden shadow-2xl ${
+                darkMode ? 'bg-[#1a1f4d]' : 'bg-[#FFF5F7]'
+              }`}
+            >
+              <div className="flex flex-col h-full">
+                {/* Header du menu */}
+                <div className={`flex justify-between items-center p-6 border-b ${darkMode ? 'border-[#FFB6C1]/30' : 'border-[#800020]/30'}`}>
+                  <h2 className={`text-2xl font-kufi font-bold ${darkMode ? 'text-[#FFB6C1]' : 'text-[#800020]'}`}>
+                    {lang === 'ar' ? 'القائمة' : 'Menu'}
+                  </h2>
+                  <button onClick={() => setMobileMenuOpen(false)} className={`p-2 rounded-lg ${darkMode ? 'hover:bg-[#FFB6C1]/20' : 'hover:bg-[#800020]/20'}`}>
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                {/* Navigation */}
+                <nav className="flex-1 p-6 space-y-4">
+                  <a href="#" onClick={() => setMobileMenuOpen(false)} className={`block py-3 px-4 rounded-xl font-kufi text-lg transition-all ${darkMode ? 'text-[#F5E6D3] hover:bg-[#FFB6C1]/20 hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:bg-[#800020]/20 hover:text-[#800020]'}`}>
+                    {t.home}
+                  </a>
+                  <a href="#videos" onClick={() => setMobileMenuOpen(false)} className={`block py-3 px-4 rounded-xl font-kufi text-lg transition-all ${darkMode ? 'text-[#F5E6D3] hover:bg-[#FFB6C1]/20 hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:bg-[#800020]/20 hover:text-[#800020]'}`}>
+                    {t.videos}
+                  </a>
+                  <a href="#quotes" onClick={() => setMobileMenuOpen(false)} className={`block py-3 px-4 rounded-xl font-kufi text-lg transition-all ${darkMode ? 'text-[#F5E6D3] hover:bg-[#FFB6C1]/20 hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:bg-[#800020]/20 hover:text-[#800020]'}`}>
+                    {t.quotes}
+                  </a>
+                  <a href="https://www.tiktok.com/@hanoflora" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className={`block py-3 px-4 rounded-xl font-kufi text-lg transition-all ${darkMode ? 'text-[#F5E6D3] hover:bg-[#FFB6C1]/20 hover:text-[#FFB6C1]' : 'text-[#1a0015] hover:bg-[#800020]/20 hover:text-[#800020]'}`}>
+                    {t.tiktok}
+                  </a>
+                </nav>
+
+                {/* Options en bas */}
+                <div className={`p-6 border-t space-y-4 ${darkMode ? 'border-[#FFB6C1]/30' : 'border-[#800020]/30'}`}>
+                  {/* Sélecteur de langue avec drapeaux */}
+                  <div className="flex gap-3">
+                    <button onClick={() => { setLang('ar'); setMobileMenuOpen(false); }} className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${lang === 'ar' ? 'bg-gradient-to-r from-[#FFB6C1] to-[#FF69B4] text-[#1a1f4d]' : darkMode ? 'bg-[#FFB6C1]/10 text-[#FFB6C1]' : 'bg-[#800020]/10 text-[#800020]'}`}>
+                      <span className="text-2xl">🇹🇳</span>
+                      <span>عربي</span>
+                    </button>
+                    <button onClick={() => { setLang('en'); setMobileMenuOpen(false); }} className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${lang === 'en' ? 'bg-gradient-to-r from-[#FFB6C1] to-[#FF69B4] text-[#1a1f4d]' : darkMode ? 'bg-[#FFB6C1]/10 text-[#FFB6C1]' : 'bg-[#800020]/10 text-[#800020]'}`}>
+                      <span className="text-2xl">🇬🇧</span>
+                      <span>ENG</span>
+                    </button>
+                  </div>
+
+                  {/* Mode sombre/clair */}
+                  <button onClick={() => setDarkMode(!darkMode)} className={`w-full py-3 px-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${darkMode ? 'bg-[#FFB6C1]/20 text-[#FFB6C1]' : 'bg-[#800020]/20 text-[#800020]'}`}>
+                    {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                    {darkMode ? 'وضع النهار' : 'Night Mode'}
+                  </button>
+
+                  {/* Bouton Follow */}
+                  <a href="https://www.tiktok.com/@hanoflora" target="_blank" rel="noopener noreferrer" className="block w-full py-3 px-4 rounded-xl font-semibold text-center bg-gradient-to-r from-[#FFB6C1] via-[#FF69B4] to-[#FF1493] text-[#1a1f4d] hover:shadow-lg transition-all">
+                    <Heart className="w-5 h-5 inline mr-2 fill-current" /> {t.follow}
+                  </a>
+                </div>
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
@@ -505,7 +542,7 @@ function App() {
               <motion.div animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }}>
                 <AndalusianStar className="w-16 h-16 md:w-20 md:h-20" />
               </motion.div>
-              <h1 className={`font-serif text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#FFB6C1] via-[#E6E6FA] to-[#8B00FF] bg-clip-text text-transparent drop-shadow-2xl`}>
+              <h1 className={`font-kufi text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#FFB6C1] via-[#E6E6FA] to-[#8B00FF] bg-clip-text text-transparent drop-shadow-2xl`}>
                 HANofLORA
               </h1>
               <motion.div animate={{ rotate: -360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }}>
@@ -513,10 +550,10 @@ function App() {
               </motion.div>
             </div>
             
-            <h2 className={`text-3xl md:text-5xl mb-4 leading-relaxed font-bold ${darkMode ? 'text-[#F5E6D3] drop-shadow-lg' : 'text-[#1a0015] drop-shadow-lg'}`}>
+            <h2 className={`font-kufi text-3xl md:text-5xl mb-4 leading-relaxed font-bold ${darkMode ? 'text-[#F5E6D3] drop-shadow-lg' : 'text-[#1a0015] drop-shadow-lg'}`}>
               {t.title}
             </h2>
-            <p className={`text-xl md:text-2xl mb-8 font-medium bg-gradient-to-r from-[#FFB6C1] to-[#8B00FF] bg-clip-text text-transparent`}>
+            <p className={`font-kufi text-xl md:text-2xl mb-8 font-medium bg-gradient-to-r from-[#FFB6C1] to-[#8B00FF] bg-clip-text text-transparent`}>
               {t.subtitle}
             </p>
           </motion.div>
@@ -550,7 +587,7 @@ function App() {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <div className="flex justify-center mb-6"><AndalusianStar className="w-20 h-20" /></div>
-            <h2 className={`text-4xl md:text-5xl mb-4 font-bold bg-gradient-to-r from-[#FFB6C1] via-[#E6E6FA] to-[#8B00FF] bg-clip-text text-transparent drop-shadow-lg`}>
+            <h2 className={`font-kufi text-4xl md:text-5xl mb-4 font-bold bg-gradient-to-r from-[#FFB6C1] via-[#E6E6FA] to-[#8B00FF] bg-clip-text text-transparent drop-shadow-lg`}>
               {t.moments}
             </h2>
             <p className={`text-xl mb-3 ${darkMode ? 'text-[#F5E6D3] drop-shadow-md' : 'text-[#1a0015] drop-shadow-md'}`}>{t.momentsDesc}</p>
@@ -620,7 +657,6 @@ function App() {
                                 <span>{formatDate(video.publishedAt)}</span>
                                 {video.viewCount && <span>👁 {video.viewCount}</span>}
                               </div>
-                              {/* BOUTON ROSE ET NOIR DORÉ */}
                               <button onClick={() => handlePlayVideo(video.id)}
                                 className="w-full py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all shadow-lg bg-gradient-to-r from-[#FFB6C1] via-[#FF69B4] to-[#1a0a05] text-[#FFD700] hover:shadow-[#FFB6C1]/50 border border-[#FFD700]/30">
                                 <Play className="w-4 h-4 fill-current text-[#FFD700]" /> {t.play}
@@ -667,7 +703,7 @@ function App() {
           <motion.div animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }} className="mb-6">
             <AndalusianStar className="w-24 h-24 mx-auto" />
           </motion.div>
-          <h2 className={`text-4xl md:text-5xl mb-4 font-bold bg-gradient-to-r from-[#FFB6C1] via-[#E6E6FA] to-[#8B00FF] bg-clip-text text-transparent drop-shadow-lg`}>
+          <h2 className={`font-kufi text-4xl md:text-5xl mb-4 font-bold bg-gradient-to-r from-[#FFB6C1] via-[#E6E6FA] to-[#8B00FF] bg-clip-text text-transparent drop-shadow-lg`}>
             {t.peace}
           </h2>
           <p className={`text-2xl italic mb-12 ${darkMode ? 'text-[#F5E6D3]' : 'text-[#1a0015]'}`} style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
@@ -682,7 +718,7 @@ function App() {
                 }`}>
                 <AndalusianStar className="absolute top-4 right-4 w-8 h-8 opacity-50" />
                 <AndalusianStar className="absolute top-4 left-4 w-8 h-8 opacity-50" />
-                <h3 className={`text-3xl mb-4 font-bold bg-gradient-to-r from-[#FFB6C1] via-[#E6E6FA] to-[#8B00FF] bg-clip-text text-transparent`}>
+                <h3 className={`font-kufi text-3xl mb-4 font-bold bg-gradient-to-r from-[#FFB6C1] via-[#E6E6FA] to-[#8B00FF] bg-clip-text text-transparent`}>
                   {currentQuote.category}
                 </h3>
                 <p className={`text-2xl md:text-3xl leading-relaxed mb-4 ${darkMode ? 'text-[#F5E6D3]' : 'text-[#1a0015]'}`}>
@@ -719,7 +755,7 @@ function App() {
             <AndalusianStar className="w-16 h-16 mx-auto" />
           </motion.div>
           
-          <h3 className={`font-serif text-4xl mb-6 font-bold bg-gradient-to-r from-[#FFB6C1] via-[#E6E6FA] to-[#8B00FF] bg-clip-text text-transparent`}>HANofLORA</h3>
+          <h3 className={`font-kufi text-4xl mb-6 font-bold bg-gradient-to-r from-[#FFB6C1] via-[#E6E6FA] to-[#8B00FF] bg-clip-text text-transparent`}>HANofLORA</h3>
           <p className={`text-xl mb-8 leading-relaxed ${darkMode ? 'text-[#F5E6D3]' : 'text-[#1a0015]'}`}>
             {t.footer}
           </p>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,6 +9,11 @@
     @apply bg-royal-pearl dark:bg-dark-velvet text-royal-brown dark:text-dark-champagne transition-colors duration-700;
     font-family: 'Tajawal', 'Inter', sans-serif;
   }
+}
+
+/* Classe pour la police Coufique (Kufi) sur les titres et menus arabes */
+.font-kufi {
+  font-family: 'Amiri', serif !important;
 }
 
 @layer utilities {
