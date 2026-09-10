@@ -1,3 +1,4 @@
+
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Heart, Play, X, Sparkles, Sun, Moon, Menu, Loader2, Share2, RefreshCw } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
